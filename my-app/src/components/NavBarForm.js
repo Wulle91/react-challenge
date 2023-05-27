@@ -1,11 +1,17 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export class NavBarForm extends Component {
-  render() {
-    return (
-      <div>NavBarForm</div>
-    )
-  }
+function NavBarForm() {
+  return (
+    <div>
+        <form>
+            <label for="username">Username</label>
+            <input placeholder="username" name="username"/>
+            <label for="Password">Password</label>
+            <input placeholder="password" name="Password"/>
+            <button>Submit</button>
+        </form>
+    </div>
+  )
 }
 
 export default NavBarForm

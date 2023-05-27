@@ -14,13 +14,12 @@ class NavBarSimple extends Component {
         }
     }
 
-    handleclick = () => {
-        this.setState((prevState) => ({
-            message: prevState.message === "Hello, guest!" ? "Welcome back, user!" : "Hello, guest!",
-            buttonText: prevState.buttonText === "Log out" ? "Log in" : "Log out",
-        }), ()=> console.log(this.state.message))
-        
-    }
+    // handleclick = () => {
+    //     this.setState((prevState) => ({
+    //         message: prevState.message === "Hello, guest!" ? "Welcome back, user!" : "Hello, guest!",
+    //         buttonText: prevState.buttonText === "Log out" ? "Log in" : "Log out",
+    //     }), ()=> console.log(this.state.message))
+    // }
 
     render() {
         return (
