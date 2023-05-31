@@ -14,21 +14,25 @@ class NavBarSimple extends Component {
         }
     }
 
-    // handleclick = () => {
-    //     this.setState((prevState) => ({
-    //         message: prevState.message === "Hello, guest!" ? "Welcome back, user!" : "Hello, guest!",
-    //         buttonText: prevState.buttonText === "Log out" ? "Log in" : "Log out",
-    //     }), ()=> console.log(this.state.message))
-    // }
+    handleclick = () => {
+        this.setState((prevState) => ({
+           
+            buttonText: prevState.buttonText === "Log out" ? "Log in" : "Log out",
+            isLoggedIn: !prevState.isLoggedIn
+        }), ()=> console.log(this.state.message))
+    }
+
+
 
     render() {
         return (
             <div className={css.NavBar}>
-                <NavBarForm />
-                <div>
+                <h1>My Gallery</h1>
+                {this.state.isLoggedIn ? <NavBarForm handleFormSubmit={this.handleclick}/>
+                : <div>
                     <span>{this.state.message}</span>
-                    <button onClick={() => this.handleclick()}>{this.state.buttonText}</button>
-                </div>
+                    <button onClick={this.handleclick}>{this.state.buttonText}</button>
+                </div>}
             </div>
         )
     }

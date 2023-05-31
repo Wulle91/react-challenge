@@ -1,15 +1,17 @@
 import React from 'react'
 
-function NavBarForm() {
+function NavBarForm(props) {
   return (
     <div>
+        
         <form>
             <label for="username">Username</label>
             <input placeholder="username" name="username"/>
             <label for="Password">Password</label>
             <input placeholder="password" name="Password"/>
-            <button>Submit</button>
+            <button onClick={props.handleFormSubmit}>Submit</button>
         </form>
+        
     </div>
   )
 }
