@@ -1,32 +1,41 @@
 import React, { Component } from "react";
 import css from "./css/Content.module.css";
-import {savedPosts} from "../posts.json";
-import PostItem from "./PostItem";
+import PostItemAPI from "./PostItemAPI";
 import Loader from "./Loader";
 import API_KEY from "../secrets";
+import axios from 'axios'
 
-export class Content extends Component {
+export class ContentAPI extends Component {
     constructor(props) {
         super(props)
         this.state = {
             isLoaded: false,
             posts: [],
+            savedPosts: [],
         }
     }
 
     componentDidMount() {
-        setTimeout(()=>{
-            this.setState({
-                isLoaded: true,
-                posts: savedPosts,
-            })
-        }, 2000)
+        this.fetchImages()
     }
+
+    async fetchImages () {
+        const response = await axios.get(`https://pixabay.com/api/?key=${API_KEY}&q=yellow+flowers&image_type=photo&pretty=true`);
+        const fetchedPosts = response.data.hits
+        console.log(fetchedPosts)
+        this.setState({
+            isLoaded: true,
+            posts: fetchedPosts,
+            savedPosts: fetchedPosts,
+        })
+    }
+
+    
 
     handleNames = (event) => {
         let inputText = event.target.value.toLowerCase()
-        const filteredPosts = savedPosts.filter(post => {
-            return post.name.toLowerCase().includes(inputText)
+        const filteredPosts = this.state.savedPosts.filter(post => {
+            return post.user.toLowerCase().includes(inputText)
         })
         this.setState({
             posts: filteredPosts
@@ -49,7 +58,7 @@ export class Content extends Component {
                 <div className={css.SearchResults}>
                     {
                         this.state.isLoaded ?
-                        <PostItem savedPosts={savedPosts} />
+                        <PostItemAPI savedPosts={this.state.posts} />
                         : <Loader />
                     }
                 </div>
@@ -58,4 +67,4 @@ export class Content extends Component {
     }
 }
 
-export default Content
+export default ContentAPI
